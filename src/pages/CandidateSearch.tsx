@@ -48,33 +48,30 @@ const CandidateSearch = () => {
   <>
     <h1>CandidateSearch</h1>
     {/*Create card to display candidate data*/}
-    
-    {/*WHEN the candidate search page loads
-      THEN the information for one candidate should be displayed, 
-      including the candidate's name, username, location, avatar, email, html_url, and company */}
-      <body>
-        <main>
+      <main>
+        {/*WHEN the candidate search page loads
+        THEN the information for one candidate should be displayed, 
+        including the candidate's name, username, location, avatar, email, html_url, and company */}
+        <div>
           <figure><img src={candidateData.avatar} alt={candidateData.name}/></figure>
           <h2>{candidateData.name}</h2>
           <p>Location: {candidateData.location}</p>
           <p>Email: {candidateData.email}</p>
           <p>Company: {candidateData.company}</p>
           <p>Bio: {candidateData.bio}</p>
-        </main>
-      </body>
-      
-    {/*WHEN I click the "+" button
-      THEN the candidate should be saved to the list of potential 
-      candidates and the next candidate's information should be displayed */}
-    <button onClick={() => saveCandidate()}>+</button>
-    <br/>
-    {/*WHEN I click the "-" button
-      THEN the next candidate's information should be displayed without saving the current candidate */}
-    <button onClick={() => displayNextCandidate()}>-</button>
-    
-    {/*WHEN there are no candidates available to review
-      THEN an appropriate message should be shown indicating no more candidates are available */}
-      {!candidateData? <p>No more candidates available</p> : null}
+        </div>
+          {/*WHEN I click the "+" button
+          THEN the candidate should be saved to the list of potential 
+          candidates and the next candidate's information should be displayed */}
+        <button onClick={() => saveCandidate()}>+</button>
+        <br/>
+          {/*WHEN I click the "-" button
+          THEN the next candidate's information should be displayed without saving the current candidate */}
+        <button onClick={() => displayNextCandidate()}>-</button>
+          {/*WHEN there are no candidates available to review
+          THEN an appropriate message should be shown indicating no more candidates are available */}
+          {!candidateData? <p>No more candidates available</p> : null}
+      </main>
   </>
   );
 };
