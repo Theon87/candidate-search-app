@@ -52,16 +52,16 @@ const CandidateSearch = () => {
     {/*WHEN the candidate search page loads
       THEN the information for one candidate should be displayed, 
       including the candidate's name, username, location, avatar, email, html_url, and company */}
-      <div>
-        <section>
+      <body>
+        <main>
           <figure><img src={candidateData.avatar} alt={candidateData.name}/></figure>
           <h2>{candidateData.name}</h2>
           <p>Location: {candidateData.location}</p>
           <p>Email: {candidateData.email}</p>
           <p>Company: {candidateData.company}</p>
           <p>Bio: {candidateData.bio}</p>
-        </section>
-      </div>
+        </main>
+      </body>
       
     {/*WHEN I click the "+" button
       THEN the candidate should be saved to the list of potential 
