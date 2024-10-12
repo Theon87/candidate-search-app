@@ -10,6 +10,8 @@ const CandidateSearch = () => {
 
   const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
 
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
   // TODO: Create a function to search for a candidate
   const searchForCandidate = async () => {
     const data = await searchGithub();
@@ -42,6 +44,9 @@ const CandidateSearch = () => {
   // TODO: Create a function to display the next candidate
   const displayNextCandidate = () => {
     searchForCandidate();
+    if (!candidateData) {
+      setErrorMessage('No more candidates available');
+    }
   };
 
   return ( 
@@ -70,7 +75,13 @@ const CandidateSearch = () => {
         <button onClick={() => displayNextCandidate()}>-</button>
           {/*WHEN there are no candidates available to review
           THEN an appropriate message should be shown indicating no more candidates are available */}
-          {!candidateData? <p>No more candidates available</p> : null}
+          {errorMessage && (
+            <div>
+              <p className="error-text">{errorMessage}</p>
+            </div>
+          )}
+
+          {/* {!candidateData? <p>No more candidates available</p> : null} */}
       </main>
   </>
   );
