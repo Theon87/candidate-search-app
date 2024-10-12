@@ -4,27 +4,43 @@ import { Candidate } from '../interfaces/Candidate.interface';
 
 const CandidateSearch = () => {
   // TODO: Create state variables for the candidate data and the search query
-  const [candidate, setCandidate] = useState<Candidate | null>();
+  const [candidateData, setCandidateData] = useState<Candidate | []>([]);
+  
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // TODO: Create a function to add a candidate to saved candidates 
-  const addToSavedCandidates = () => {
-    let savedCandidates = [];
-    const storedCandidates = localStorage.getItem('savedCandidates');
-    if (typeof storedCandidates === 'string') {
-      savedCandidates = JSON.parse(storedCandidates);
+  // TODO: Create a function to search for a candidate
+  const searchForCandidate = async () => {
+    const data = await searchGithub();
+    setCandidateData(data);
+  };
+
+  useEffect(() => {
+    searchForCandidate();
+  },[]);
+
+  // TODO: Create a function to search for a candidate by username
+  const searchForCandidateByUsername = async () => {
+    const data = await searchGithubUser(searchQuery);
+    setCandidateData(data);
+  };
+
+  // TODO: Create a function to save a candidate to the list of saved candidates
+  const saveCandidate = () => {
+    const savedCandidates = localStorage.getItem('savedCandidates');
+    if (savedCandidates) {
+      localStorage.setItem('savedCandidates', JSON.stringify([...savedCandidates, candidateData]));
+    } else {
+      localStorage.setItem('savedCandidates', JSON.stringify([candidateData]));
     }
-    savedCandidates.push(candidate);
-    localStorage.setItem('savedCandidates', JSON.stringify(savedCandidates));
+    displayNextCandidate();
   };
 
-  const nextCandidate = () => {
-    searchGithub().then((data) => {
-      setCandidate(data);
-    });
-
-    nextCandidate();
+  // TODO: Create a function to display the next candidate
+  const displayNextCandidate = () => {
+    searchForCandidate();
   };
+
+
 
   return ( 
   <>
@@ -41,11 +57,11 @@ const CandidateSearch = () => {
     {/*WHEN I click the "+" button
       THEN the candidate should be saved to the list of potential 
       candidates and the next candidate's information should be displayed */}
-    <button onClick={() => addToSavedCandidates()}>+</button>
+    <button onClick={() => saveCandidate()}>+</button>
     
     {/*WHEN I click the "-" button
       THEN the next candidate's information should be displayed without saving the current candidate */}
-    <button onClick={() => searchGithub()}>-</button>
+    <button onClick={() => displayNextCandidate()}>-</button>
     
     {/*WHEN there are no candidates available to review
       THEN an appropriate message should be shown indicating no more candidates are available */}
