@@ -13,44 +13,34 @@ const CandidateSearch = () => {
   
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  console.log(candidateData);
-  // TODO: Create a function to search for a candidate
+  // TODO: Create a function to search for a candidate using the API
   const searchForCandidate = async () => {
     const data = await searchGithub();
     setCandidateData(data);
   };
 
+  // TODO: Call the searchForCandidate function when the page loads
   useEffect(() => {
     searchForCandidate();
   },[]);
 
-  // TODO: Create a function to search for a candidate by username
-  const searchForCandidateByUsername = async () => {
-    const data = await searchGithubUser(searchQuery);
-    setCandidateData(data);
-    setSearchQuery('');
-  };
-
   // TODO: Create a function to save a candidate to the list of saved candidates
-  const saveCandidate = () => {
-    setSavedCandidates([...savedCandidates, candidateData]);
-    // const savedCandidates = localStorage.getItem('savedCandidates');
-    // if (savedCandidates) {
-    //   localStorage.setItem('savedCandidates', JSON.stringify([...savedCandidates, candidateData]));
-    // } else {
-    //   localStorage.setItem('savedCandidates', JSON.stringify([candidateData]));
-    // }
-    displayNextCandidate();
-  };
+
 
   // TODO: Create a function to display the next candidate
   const displayNextCandidate = () => {
-    console.log('displaying next candidate');
     searchForCandidate();
     if (!candidateData) {
       setErrorMessage('No more candidates available');
     }
   };
+
+    // TODO: Create a function to search for a candidate by username
+    const searchForCandidateByUsername = async () => {
+      const data = await searchGithubUser(searchQuery);
+      setCandidateData(data);
+      setSearchQuery('');
+    };
 
   return ( 
   <>
@@ -64,14 +54,15 @@ const CandidateSearch = () => {
           {candidateData.map((candidate) => (
             <div key={candidate.id}>
               <figure><img src={candidate.avatar_url} alt={candidate.name}/></figure>
-              <h2>{candidate.username}</h2>
+              <h2>{candidate.login}({candidate.login})</h2>
               <p>Location: {candidate.location}</p>
               <p>Email: {candidate.email}</p>
               <p>Company: {candidate.company}</p>
               <p>Bio: {candidate.bio}</p>
             </div>
           ))}
-        </div>
+        </div>  
+
           {/*WHEN I click the "+" button
           THEN the candidate should be saved to the list of potential 
           candidates and the next candidate's information should be displayed */}

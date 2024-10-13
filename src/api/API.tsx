@@ -3,7 +3,7 @@ const searchGithub = async () => {
     const start = Math.floor(Math.random() * 100000000) + 1;
     console.log(import.meta.env.VITE_GITHUB_TOKEN);
     const response = await fetch(
-      `https://api.github.com/users?since=${start}`,
+      `https://api.github.com/users?since=${start}&per_page=1`,
       {
         headers: {
           // Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
