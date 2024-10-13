@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react';
 import { searchGithub, searchGithubUser } from '../api/API';
-import { Candidate } from '../interfaces/Candidate.interface';
+// import { Candidate } from '../interfaces/Candidate.interface';
+import Candidate from '../interfaces/Candidate.interface';
 
 const CandidateSearch = () => {
   // TODO: Create state variables for the candidate data and the search query
   const [candidateData, setCandidateData] = useState<Candidate[]>([]);
-  
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const [savedCandidates, setSavedCandidates] = useState<Candidate[]>([]);
 
   const [errorMessage, setErrorMessage] = useState<string>('');
+  
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
+  console.log(candidateData);
   // TODO: Create a function to search for a candidate
   const searchForCandidate = async () => {
     const data = await searchGithub();
@@ -43,6 +45,7 @@ const CandidateSearch = () => {
 
   // TODO: Create a function to display the next candidate
   const displayNextCandidate = () => {
+    console.log('displaying next candidate');
     searchForCandidate();
     if (!candidateData) {
       setErrorMessage('No more candidates available');
@@ -58,12 +61,16 @@ const CandidateSearch = () => {
         THEN the information for one candidate should be displayed, 
         including the candidate's name, username, location, avatar, email, html_url, and company */}
         <div>
-          <figure><img src={candidateData.avatar} alt={candidateData.name}/></figure>
-          <h2>{candidateData.name}</h2>
-          <p>Location: {candidateData.location}</p>
-          <p>Email: {candidateData.email}</p>
-          <p>Company: {candidateData.company}</p>
-          <p>Bio: {candidateData.bio}</p>
+          {candidateData.map((candidate) => (
+            <div key={candidate.id}>
+              <figure><img src={candidate.avatar_url} alt={candidate.name}/></figure>
+              <h2>{candidate.username}</h2>
+              <p>Location: {candidate.location}</p>
+              <p>Email: {candidate.email}</p>
+              <p>Company: {candidate.company}</p>
+              <p>Bio: {candidate.bio}</p>
+            </div>
+          ))}
         </div>
           {/*WHEN I click the "+" button
           THEN the candidate should be saved to the list of potential 
@@ -80,6 +87,11 @@ const CandidateSearch = () => {
               <p className="error-text">{errorMessage}</p>
             </div>
           )}
+
+          {/*WHEN I search for a candidate by username
+          THEN the candidate's information should be displayed */}
+          <button onClick={() => searchForCandidateByUsername()}>Search</button>
+          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
 
           {/* {!candidateData? <p>No more candidates available</p> : null} */}
       </main>
