@@ -25,6 +25,14 @@ const CandidateSearch = () => {
   },[]);
 
   // TODO: Create a function to save a candidate to the list of saved candidates
+  const saveCandidates = () => {
+    const storedCandidates = localStorage.getItem('savedCandidates');
+    if (storedCandidates) {
+      setSavedCandidates(JSON.parse(storedCandidates));
+    }
+    localStorage.setItem('savedCandidates', JSON.stringify([...savedCandidates, ...candidateData]));
+    displayNextCandidate();
+  };
 
 
   // TODO: Create a function to display the next candidate
@@ -66,11 +74,14 @@ const CandidateSearch = () => {
           {/*WHEN I click the "+" button
           THEN the candidate should be saved to the list of potential 
           candidates and the next candidate's information should be displayed */}
-        <button onClick={() => saveCandidate()}>+</button>
+        <button onClick={() => saveCandidates()}>+</button>
+
         <br/>
+
           {/*WHEN I click the "-" button
           THEN the next candidate's information should be displayed without saving the current candidate */}
         <button onClick={() => displayNextCandidate()}>-</button>
+
           {/*WHEN there are no candidates available to review
           THEN an appropriate message should be shown indicating no more candidates are available */}
           {errorMessage && (
