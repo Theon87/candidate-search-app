@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const SavedCandidates = () => {
   const [potentialCandidates, setPotentialCandidates] = useState<Candidate[]>([]);
+
 // pull data from local storage and add to the table
   const getStoredCandidates = () => {
     const storedCandidates = localStorage.getItem('savedCandidates');
@@ -14,17 +15,10 @@ const SavedCandidates = () => {
   };
 
   console.log(potentialCandidates);
-  
+
   useEffect(() => {
     getStoredCandidates();
   }, []);
-
-  // const [tableData, setTableData] = useState([{}]); 
-
-  // const [newRow, setNewRow] = useState<Candidate | null>(null);
-
-  // add a new row to the table based on the saved data in local storage
-
 
   return (
     <>
@@ -45,15 +39,17 @@ const SavedCandidates = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>candidate.name</td>
-              <td>candidate.username</td>
-              <td>candidate.location</td>
-              <td>candidate.avatar_url</td>
-              <td>candidate.email</td>
-              <td>candidate.html_url</td>
-              <td>candidate.company</td>
+            {potentialCandidates.map((candidate, index) => (
+            <tr key={index}>
+              <td>{candidate.name}</td>
+              <td>{candidate.username}</td>
+              <td>{candidate.location}</td>
+              <td>{candidate.avatar_url}</td>
+              <td>{candidate.email}</td>
+              <td>{candidate.html_url}</td>
+              <td>{candidate.company}</td>
             </tr>
+            ))}
           </tbody>
         </table>
 
