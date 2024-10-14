@@ -1,14 +1,29 @@
 // import CandidateSearch from "./CandidateSearch";
-// import { Candidate } from "../types";
-// import { useState } from "react";
+import Candidate from "../interfaces/Candidate.interface";
+import { useEffect, useState } from "react";
 
 const SavedCandidates = () => {
+  const [potentialCandidates, setPotentialCandidates] = useState<Candidate[]>([]);
+// pull data from local storage and add to the table
+  const getStoredCandidates = () => {
+    const storedCandidates = localStorage.getItem('savedCandidates');
+    if (storedCandidates) {
+      setPotentialCandidates(JSON.parse(storedCandidates));
+    }
+    return potentialCandidates;
+  };
 
-// const [tableData, setTableData] = useState([{}]); 
+  console.log(potentialCandidates);
+  
+  useEffect(() => {
+    getStoredCandidates();
+  }, []);
 
-// const [newRow, setNewRow] = useState<Candidate | null>(null);
+  // const [tableData, setTableData] = useState([{}]); 
 
-// add a new row to the table based on the saved data in local storage
+  // const [newRow, setNewRow] = useState<Candidate | null>(null);
+
+  // add a new row to the table based on the saved data in local storage
 
 
   return (
