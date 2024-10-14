@@ -26,7 +26,12 @@ const SavedCandidates = () => {
       {/*WHEN the potential candidates page loads
         THEN the user should see a list of previously saved potential
         candidates with their name, username, location, avatar, email, html_url, and company*/}
-        <table>
+
+        
+      {/*WHEN the page reloads
+        THEN the list of potential candidates should persist and be available for viewing*/}
+
+        <table className="table">
           <thead>
             <tr>
               <th>Name</th>
@@ -38,13 +43,13 @@ const SavedCandidates = () => {
               <th>Company</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="tbody tr:nth-child(odd)">
             {potentialCandidates.map((candidate, index) => (
-            <tr key={index}>
+            <tr className="tr" key={index}>
               <td>{candidate.name}</td>
               <td>{candidate.username}</td>
               <td>{candidate.location}</td>
-              <td>{candidate.avatar_url}</td>
+              <td><img src={candidate.avatar_url}></img></td>
               <td>{candidate.email}</td>
               <td>{candidate.html_url}</td>
               <td>{candidate.company}</td>
@@ -52,14 +57,6 @@ const SavedCandidates = () => {
             ))}
           </tbody>
         </table>
-
-      {/*WHEN the page reloads
-        THEN the list of potential candidates should persist and be available for viewing*/}
-      
-      
-      {/*WHEN there are no potential candidates
-        THEN an appropriate message should be displayed indicating no candidates have been accepted*/}
-
     </>
   );
 };
