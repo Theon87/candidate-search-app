@@ -1,33 +1,37 @@
-# React + TypeScript + Vite
+# <Candidate Search App>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+This app calls the GitHub API and renders data in the browser. It will help employers easily review candidates for the positions that they are trying to fill. 
 
-* [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md), which uses [Babel](https://babeljs.io/) for Fast Refresh
-* [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc), which uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## Expanding the ESLint configuration
+After cloning the repository, use an npm install and npm run build get the app going. When you have the required packages, you would be able to run the app in dev mode using npm run dev. If the app is working the way you want, you could then deploy it on a service such as render. 
 
-If you're developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Usage
 
-* Configure the top-level `parserOptions` property as follows:
+Use this app by doing the following;
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- On the home page, the API will load a candidate with their information on screen. 
+![home page](/src/assets/CandidateSearchHomePage.png)
+- Use the "+" sign to save the candidate as a potential candidate and view the next candidate.
+- Use the "-" sign to view the next candidate without saving.
+- Your saved candidates will be stored on your local storage.
+![local storage](/src/assets/SavedCandidatesInLocalStorage.png)
+- On the potential candidates page, a table with your saved candidates will be loaded.
+![potential candidates page](/src/assets/PotentialCandidatesPage.png)
 
-* Replace `plugin:@typescript-eslint/recommended` with `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`.
-* Optionally, add `plugin:@typescript-eslint/stylistic-type-checked`.
-* Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` and `plugin:react/jsx-runtime` to the `extends` list.
 
----
-© 2024 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+## Credits
+
+This app was built to call on the GitHub API.
+
+## License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## How to Contribute
+
+- Direct Request on GitHub [https://github.com/Theon87/candidate-search-app].
+
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
