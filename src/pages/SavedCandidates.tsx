@@ -2,6 +2,8 @@
 import Candidate from "../interfaces/Candidate.interface";
 import { useEffect, useState } from "react";
 
+console.log("Does this work?");
+
 const SavedCandidates = () => {
   const [potentialCandidates, setPotentialCandidates] = useState<Candidate[]>([]);
 
